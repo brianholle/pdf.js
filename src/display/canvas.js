@@ -1082,26 +1082,26 @@ var CanvasGraphics = (function CanvasGraphicsClosure() {
       var ctx = this.ctx;
       var current = this.current;
       var x = current.x, y = current.y;
-      var xw, yh, origX, origY, pixelSize = this.getSinglePixelWidth();
+      let xw, yh, origX, origY, pixelSize = this.getSinglePixelWidth();
       for (var i = 0, j = 0, ii = ops.length; i < ii; i++) {
         switch (ops[i] | 0) {
           case OPS.rectangle:
-            origX = args[0];
-            origY = args[1];
+            origX = args[j++];
+            origY = args[j++];
             if (pixelSize) {
-              x = Math.floor(args[j++] / pixelSize) * pixelSize;
-              y = Math.ceil(args[j++] / pixelSize) * pixelSize;
+              x = Math.floor(origX / pixelSize) * pixelSize;
+              y = Math.ceil(origY / pixelSize) * pixelSize;
             } else {
-              x = args[j++];
-              y = args[j++];
+              x = origX;
+              y = origY;
             }
             var width = args[j++];
             var height = args[j++];
             if (width === 0) {
-              width = this.getSinglePixelWidth();
+              width = pixelSize;
             }
             if (height === 0) {
-              height = this.getSinglePixelWidth();
+              height = pixelSize;
             }
             if (pixelSize) {
               xw = Math.ceil((origX + width) / pixelSize) * pixelSize;
